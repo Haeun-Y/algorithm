@@ -2,9 +2,11 @@
 #include <algorithm>
 using namespace std;
 
+
+
 typedef struct stu
 {
-	char name[15];
+	char name[16];//ë¬¸ìì—´ ì£¼ì˜
 	int date;
 	int month;
 	int year;
@@ -19,11 +21,9 @@ bool compare(const stu& stu1, const stu& stu2)
 	{
 		if (stu1.month == stu2.month)
 			return stu1.date < stu2.date;
-		
 		else return stu1.month < stu2.month;
 	}
 	else return false;
-
 }
 int main(void)
 {
@@ -33,15 +33,18 @@ int main(void)
 	int num = 0;
 	cin >> num;
 
+	
 	for (int i = 0; i < num; i++)
 	{
 		cin >> arr[i].name >> arr[i].date >> arr[i].month >> arr[i].year;
 	}
 
-	sort(arr, arr + 5, compare);//year, month, date ¿À¸§Â÷¼ø Á¤·Ä == ³ªÀÌ ¸¹Àº ¼øÀÓ
+	sort(arr, arr+num, compare);//year, month, date ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬ == ë‚˜ì´ ë§ì€ ìˆœì„
 
-
-	cout << arr[num - 1].name << endl;
+	cout << arr[num-1].name << endl;
 	cout << arr[0].name << endl;
+
+	
+
 
 }
