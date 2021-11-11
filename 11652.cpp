@@ -3,14 +3,6 @@
 #include <vector>
 using namespace std;
 
-bool compare(pair<long long, int> a, pair<long long, int> b)
-{
-	if (a.second == b.second)//first가 작은 것을 출력
-	{
-		return a.first < b.first;
-	}
-	else return a.second > b.second; //같은 카드 갯수 기준 내림차순
-}
 int main(void)
 {
 	int numOfCard = 0;
@@ -25,6 +17,7 @@ int main(void)
 
 	int maxTimes = 0;
 	long long maxNum = 0;
+
 	//정렬된 벡터에서 가장 많이 나온 숫자가 몇번인지 세기
 	for (int i = 0; i < numOfCard;)
 	{
