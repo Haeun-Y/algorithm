@@ -1,51 +1,43 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <utility>
+#include <bits/stdc++.h>
 using namespace std;
 
-bool cmp(pair<int, int> a, pair<int, int> b)
+typedef struct{
+int num;
+int zipNum;
+int idx;
+}node;
+bool cmp2(node a, node b)
 {
-	return a.first < b.first;
+  return a.idx < b.idx;
 }
-bool cmp2(pair<int, int> a, pair<int, int> b)
+bool cmp(node a, node b)
 {
-	return a.second < b.second;
+  return a.num < b.num;
 }
-int main(void)
-{
-	int num = 0;
-	scanf_s("%d", &num);
+int main() {
+    
+    int numOfNum=0;
+  scanf("%d",&numOfNum);
 
-	vector<pair<int,int>> dotList(num);
+  vector<node> nums(numOfNum);
 
-	for (int i = 0; i < num; i++)
-	{
-		scanf_s("%d", &dotList[i].first);
-		dotList[i].second = i;
-	}
+  for(int i =0; i<numOfNum; i++)
+    {
+      scanf("%d",&nums[i].num);
+      nums[i].idx =i;
+    }
+  
+  sort(nums.begin(), nums.end(), cmp);
 
-	sort(dotList.begin(), dotList.end(), cmp);
+  int initNum =0;
+  for(int i =0; i<numOfNum; i++)
+    {
+      
+      nums[i].zipNum = initNum;
+      if(i<numOfNum-1 && nums[i+1].num != nums[i].num) initNum++;
+      
+    }
+  sort(nums.begin(), nums.end(), cmp2);
 
-	dotList[0].first = 0;
-	int j = 1;
-
-	for (int i = 1; i < num; i++)
-	{
-		if (dotList[i].first == dotList[i - 1].first)
-		{
-			dotList[i].first = dotList[i - 1].first;
-		}
-		else
-		{
-			dotList[i].first = j;
-			j++;
-		}
-	}
-
-	sort(dotList.begin(), dotList.end(), cmp2);
-	for (int i = 0; i < num; i++)
-	{
-		printf("%d ", dotList[i].first);
-	}
+  for(int i=0; i<numOfNum; i++) printf("%d ", nums[i].zipNum);
 }
