@@ -1,3 +1,6 @@
+//220401
+//백준 18870번 좌표 압축 문제(실버 2)
+//boj.kr/18870
 #include <bits/stdc++.h>
 using namespace std;
 
