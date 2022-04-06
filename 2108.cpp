@@ -1,47 +1,73 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
+
+typedef struct
+{
+    int num;
+    int times;
+    
+}element;
+bool cmp(element a, element b)
+{
+    if(a.times == b.times) return a.num < b.num;
+    else return a.times > b.times;
+}
+void mean(vector<int>& target)
+{
+	double sum = 0;
+	for (int i = 0; i < target.size(); i++)
+		sum += target[i];
+    
+    double result = sum / target.size();
+    if(result < 0.5 &&result > -0.5) result = 0;
+    printf("%.0lf\n", result);
+}
+void median(vector<int>& target)
+{
+	printf("%d\n", target[target.size() / 2 ]);
+}
+void mode(vector<int>& target)
+{
+    vector<element> tmp;
+    int maxTimesNum = target[0];
+    int maxTimes = 1;
+	for(int i =0; i<target.size();)
+	{
+	    int num = target[i], times = 1;
+	    int upperIdx = upper_bound(target.begin(), target.end(), num) - target.begin();
+	    if(num == target.back()) times = target.size() - i;
+	    else times = upperIdx - (lower_bound(target.begin(), target.end(), num) - target.begin());
+	    element e;
+	    e.num = num;
+	    e.times = times;
+	    tmp.push_back(e);
+	    i = upperIdx;
+	}
+	
+	sort(tmp.begin(), tmp.end(), cmp);
+	
+	if(tmp[0].times == tmp[1].times) printf("%d\n", tmp[1].num);
+	else printf("%d\n", tmp[0].num);
+}
+void range(vector<int>& target)
+{
+	printf("%d\n", target.back()- target.front());
+}
 
 int main(void)
 {
-	int num = 0;
-	scanf_s("%d", &num);
-	vector<int> list(num);
-	
-	for (int i = 0; i < num; i++)
-		scanf_s("%d", &list[i]);
+	int n = 0;
+	scanf("%d", &n);
 
-	sort(list.begin(), list.end());
+	vector<int> list(n);
 
-	int max = 0;
-	int max_num = 0;
-	int sum = 0;
+	for (int i = 0; i < n; i++)
+		scanf("%d", &list[i]);
 
-	for (int i = 0; i < num-1; i++)
-	{
-		int tmp = 0;
-		while (i < (num - 1) && list[i] == list[i + 1])
-		{
-			tmp++;
-			printf("%d!!!\n", sum);
-			i++;
-		}
-		if (tmp > max)
-		{
-			max = tmp;
-			max_num = list[i];
-		}
+	sort(list.begin(), list.end());//오름차순 정렬
 
-	}
-	if (max == 0)
-		max_num = list[1];
-	for (int i = 0; i < num; i++)
-		sum += list[i];
-
-	printf("%.0f\n", (double)sum / num);
-	printf("%d\n", list[num / 2]);
-	printf("%d\n", max_num);
-	printf("%d", list.back() - list.front());
-
+	mean(list);
+	median(list);
+	mode(list);
+	range(list);
 }
