@@ -24,16 +24,15 @@ bool cmp2(candidate a, candidate b)
 {
     return a.name < b.name;
 }
-bool isInPic(vector<candidate>& v, int& value)
+int isInPic(vector<candidate>& v, int& value)
 {
     auto first = v.begin();
     auto last = v.end();
     for(;first != last; ++first)
     {
         if(first->name == value)
-            return first - v.begin();
+            return (first - v.begin());
     }
-    
     return -1;
 }
 int main(void)
@@ -51,12 +50,16 @@ int main(void)
         cin >> target;
         //사진에 이미 있는 후보일때
         int idx = isInPic(candidates, target);
+        
         if(-1 != idx)
+        {    
             candidates[idx].times++;
+            sort(candidates.begin(), candidates.end(), cmp);
+        } 
         else
         {
             //사진틀이 다 안찬경우
-            if(num < numOfRecommand)
+            if(num < numOfPic)
             {
                 candidates[num].name = target;
                 candidates[num].idx = num;
@@ -68,18 +71,23 @@ int main(void)
                 candidates[0].name = target;
                 candidates[0].idx = candidates[numOfPic-1].idx+1;
                 candidates[0].times = 1;
+                sort(candidates.begin(), candidates.end(), cmp);
             }
             
             
         }
-        
-        sort(candidates.begin(), candidates.end(), cmp);
+       /* for(int i =0 ;i<numOfPic; i++)
+            cout << candidates[i].name << " ";
+        cout << "\n";*/
     }
     
-    sort(candidates.begin(), candidates.end(), cmp);
     
+    sort(candidates.begin(), candidates.end(), cmp2);
     for(int i =0; i<numOfPic; i++)
-        cout << candidates[i].name << " ";
+    {   
+        int name = candidates[i].name;
+        if(name != 0) cout << name << " ";
+    }
     
     
     
