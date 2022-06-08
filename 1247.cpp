@@ -1,27 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
-int main() {
 
-  ios::sync_with_stdio(false);
-  cin.tie(NULL);
-
-  for(int i =0; i<3; i++)
+int main(void)
+{
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    const int testNum = 3;
+    
+    for(int i = 0; i<testNum; i++)
     {
-      int n;
-      cin >> n;
-
-      int sum =0;
-      for(int j=0;j<n;j++)
+        int n;
+        cin >> n;
+        
+        long long result = 0;
+        
+        for(int i = 0; i<n; i++)
         {
-          int num;
-          cin >> num;
-          sum+=num;
+            long long tmp;
+            cin >> tmp;
+            result += tmp;
         }
-      char result;
-      if(sum == 0) result = '0';
-      else if (sum >0) result = '+';
-      else result = '-';
-
-      cout << result << "\n";
+        if(result == 0)
+            cout << "0";
+        else if(result < 0)
+            cout << "-";
+        else cout << "+";
     }
 }
